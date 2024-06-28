@@ -86,8 +86,8 @@ main()
 #define TooFarFromPlayer		""NEGATIVE_MARK" Игрок слишком далеко."
 
 #define MYSQL_HOST 	"127.0.0.1"
-#define MYSQL_USER  "prigman"
-#define MYSQL_PASS  "prigman"
+#define MYSQL_USER  "root"
+#define MYSQL_PASS  ""
 #define MYSQL_BASE  "projectdb"
 
 #define SERVER_FORMAT 			0x0577FFFF
@@ -1206,18 +1206,18 @@ stock SaveAccount(playerid)
 	strcat(query,dbsrc,sizeof(query));
 	/*format(dbsrc,sizeof(dbsrc),"age=%d, ",PI[playerid][pAge]);
 	strcat(query,dbsrc,sizeof(query));*/
-	format(dbsrc,sizeof(dbsrc),"showgun=%d, ",PI[playerid][pShowGun]);
-	strcat(query,dbsrc,sizeof(query));
-	format(dbsrc,sizeof(dbsrc),"holster=%d, ",PI[playerid][pHolster]);
+	/*format(dbsrc,sizeof(dbsrc),"showgun=%d, ",PI[playerid][pShowGun]);
+	strcat(query,dbsrc,sizeof(query));*/
+	/*format(dbsrc,sizeof(dbsrc),"holster=%d, ",PI[playerid][pHolster]);
 	strcat(query,dbsrc,sizeof(query));
 	format(dbsrc,sizeof(dbsrc),"riflesling=%d, ",PI[playerid][pRifleSling]);
-	strcat(query,dbsrc,sizeof(query));
+	strcat(query,dbsrc,sizeof(query));*/
 	format(dbsrc,sizeof(dbsrc),"cardseria=%d, ",PI[playerid][pIdSeria]);
 	strcat(query,dbsrc,sizeof(query));
-	format(dbsrc,sizeof(dbsrc),"adminMessages=%d, ",PI[playerid][pAdminMess]);
+	/*format(dbsrc,sizeof(dbsrc),"adminMessages=%d, ",PI[playerid][pAdminMess]);
 	strcat(query,dbsrc,sizeof(query));
 	format(dbsrc,sizeof(dbsrc),"gChatMessages=%d, ",PI[playerid][pGchatMess]);
-	strcat(query,dbsrc,sizeof(query));
+	strcat(query,dbsrc,sizeof(query));*/
 	format(dbsrc,sizeof(dbsrc),"cardnumber=%d, ",PI[playerid][pIdNumber]);
 	strcat(query,dbsrc,sizeof(query));
 	format(dbsrc,sizeof(dbsrc),"phone=%d, ",PI[playerid][pPhone]);
@@ -1242,12 +1242,12 @@ stock SaveAccount(playerid)
 	strcat(query,dbsrc,sizeof(query));
 	format(dbsrc,sizeof(dbsrc),"houronline=%d, ",PI[playerid][pHourOnline]);
 	strcat(query,dbsrc,sizeof(query));
-	format(dbsrc,sizeof(dbsrc),"allonline=%d, ",PI[playerid][pAllOnline]);
+	/*format(dbsrc,sizeof(dbsrc),"allonline=%d, ",PI[playerid][pAllOnline]);
 	strcat(query,dbsrc,sizeof(query));
 	format(dbsrc,sizeof(dbsrc),"dayonline=%d, ",PI[playerid][pDayOnline]);
 	strcat(query,dbsrc,sizeof(query));
 	format(dbsrc,sizeof(dbsrc),"afkdayonline=%d, ",PI[playerid][pAFKDayTime]);
-	strcat(query,dbsrc,sizeof(query));
+	strcat(query,dbsrc,sizeof(query));*/
 	format(dbsrc,sizeof(dbsrc),"`hp`='%f', ",PI[playerid][pHp]);
 	strcat(query,dbsrc,sizeof(query));
 	format(dbsrc,sizeof(dbsrc),"`armour`='%f', ",PI[playerid][pArmour]);
@@ -1270,8 +1270,8 @@ stock SaveAccount(playerid)
 	strcat(query,dbsrc,sizeof(query));
 	format(dbsrc,sizeof(dbsrc),"mute=%d, ",PI[playerid][pMute]);
 	strcat(query,dbsrc,sizeof(query));
-	format(dbsrc,sizeof(dbsrc),"GCmute=%d, ",PI[playerid][pGCMute]);
-	strcat(query,dbsrc,sizeof(query));
+	/*format(dbsrc,sizeof(dbsrc),"GCmute=%d, ",PI[playerid][pGCMute]);
+	strcat(query,dbsrc,sizeof(query));*/
 	if(!AI[playerid][aLevel])
 	{
 		format(dbsrc,sizeof(dbsrc),"leader=%d, ",PI[playerid][pLeader]);
@@ -1285,7 +1285,7 @@ stock SaveAccount(playerid)
 		format(dbsrc,sizeof(dbsrc),"vigs=%d, ",PI[playerid][pVigs]);
 		strcat(query,dbsrc,sizeof(query));
 	}
-	format(dbsrc,sizeof(dbsrc),"pVehModel=%d, ",PI[playerid][pVehModel]);
+	/*format(dbsrc,sizeof(dbsrc),"pVehModel=%d, ",PI[playerid][pVehModel]);
 	strcat(query,dbsrc,sizeof(query));
 	format(dbsrc,sizeof(dbsrc),"`pVehX`='%f', ",PI[playerid][pVehX]);
 	strcat(query,dbsrc,sizeof(query));
@@ -1302,7 +1302,7 @@ stock SaveAccount(playerid)
 	format(dbsrc,sizeof(dbsrc),"pVehColorP=%d, ",PI[playerid][pVehColorP]);
 	strcat(query,dbsrc,sizeof(query));
 	format(dbsrc,sizeof(dbsrc),"pVehColorS=%d",PI[playerid][pVehColorS]);
-	strcat(query,dbsrc,sizeof(query));
+	strcat(query,dbsrc,sizeof(query));*/
 	format(dbsrc,sizeof(dbsrc)," WHERE id=%d LIMIT 1",PI[playerid][pID]);
 	strcat(query,dbsrc,sizeof(query));
 	return mysql_tquery(connects,query);
@@ -1320,7 +1320,7 @@ stock OnPlayerRegister(playerid)
 	pLoggedIn{playerid}  		= 1;
 	PI[playerid][pHp]			= 100.0;
 	query[0]=EOS;
-	mysql_format(connects, query, 800, "INSERT INTO "TABLE_ACCOUNTS" (`adminMessages`, `gChatMessages`, `name`, `salt`, `email`, `isemail`, `level`, `money`, `gender`, `skin`, `hp`, `house`, `business`, `regip`, `geton_ip`, `geton_date`, `game_reg_date`) VALUES ('%d','%d','%e','%e','%e','%d','%d','%d','%d','%d','%f','%d','%d','%e','%e', '%e', '%e')", PI[playerid][pAdminMess], PI[playerid][pGchatMess], PI[playerid][pName], PI[playerid][pHash], PI[playerid][pEmail], PI[playerid][isEmail], PI[playerid][pLevel], PI[playerid][pMoney], PI[playerid][pGender], PI[playerid][pSkin], PI[playerid][pHp], PI[playerid][pHouse], PI[playerid][pBusiness], PI[playerid][pIP], PI[playerid][pIP], PI[playerid][pRegDate], PI[playerid][pRegDate]);
+	mysql_format(connects, query, 800, "INSERT INTO "TABLE_ACCOUNTS" (`name`, `salt`, `email`, `isemail`, `level`, `money`, `gender`, `skin`, `hp`, `house`, `business`, `regip`, `geton_ip`, `geton_date`, `game_reg_date`) VALUES ('%e','%e','%e','%d','%d','%d','%d','%d','%f','%d','%d','%e','%e', '%e', '%e')", PI[playerid][pName], PI[playerid][pHash], PI[playerid][pEmail], PI[playerid][isEmail], PI[playerid][pLevel], PI[playerid][pMoney], PI[playerid][pGender], PI[playerid][pSkin], PI[playerid][pHp], PI[playerid][pHouse], PI[playerid][pBusiness], PI[playerid][pIP], PI[playerid][pIP], PI[playerid][pRegDate], PI[playerid][pRegDate]);
 	mysql_tquery(connects, query, "OnAccountCreated", "d", playerid);
 	PI[playerid][pTimer] = SetTimerEx("PlayerTimer", 1000, true, "i", playerid);
 	SendPositiveMess(playerid, "Успешная регистрация аккаунта.");
@@ -10255,7 +10255,7 @@ function: LoadAccount(playerid)
 	//cache_get_value_name_int(0, "age", PI[playerid][pAge]);
 	cache_get_value_name_int(0, "riflesling", PI[playerid][pRifleSling]);
 	cache_get_value_name_int(0, "holster", PI[playerid][pHolster]);
-	cache_get_value_name_int(0, "showgun", PI[playerid][pShowGun]);
+	//cache_get_value_name_int(0, "showgun", PI[playerid][pShowGun]);
     cache_get_value_name_int(0, "money", PI[playerid][pMoney]);
 	cache_get_value_name_int(0, "idcard", PI[playerid][pIdCard]);
 	cache_get_value_name_int(0, "cardseria", PI[playerid][pIdSeria]);
@@ -10272,7 +10272,7 @@ function: LoadAccount(playerid)
 	cache_get_value_name_int(0, "donate", PI[playerid][pDonate]);
     cache_get_value_name_float(0, "hp", PI[playerid][pHp]);
 	cache_get_value_name_float(0, "armour", PI[playerid][pArmour]);
-	cache_get_value_name_float(0, "pVehX", PI[playerid][pVehX]);
+	/*cache_get_value_name_float(0, "pVehX", PI[playerid][pVehX]);
 	cache_get_value_name_float(0, "pVehY", PI[playerid][pVehY]);
 	cache_get_value_name_float(0, "pVehZ", PI[playerid][pVehZ]);
 	cache_get_value_name_float(0, "pVehA", PI[playerid][pVehA]);
@@ -10280,11 +10280,11 @@ function: LoadAccount(playerid)
 	cache_get_value_name_float(0, "pVehHP", PI[playerid][pVehHP]);
 	cache_get_value_name_int(0, "pVehModel", PI[playerid][pVehModel]);
 	cache_get_value_name_int(0, "pVehColorP", PI[playerid][pVehColorP]);
-	cache_get_value_name_int(0, "pVehColorS", PI[playerid][pVehColorS]);
+	cache_get_value_name_int(0, "pVehColorS", PI[playerid][pVehColorS]);*/
 	cache_get_value_name_int(0, "house", PI[playerid][pHouse]);
 	cache_get_value_name_int(0, "business", PI[playerid][pBusiness]);
-	cache_get_value_name_int(0, "adminMessages", PI[playerid][pAdminMess]);
-	cache_get_value_name_int(0, "gChatMessages", PI[playerid][pGchatMess]);
+	/*cache_get_value_name_int(0, "adminMessages", PI[playerid][pAdminMess]);
+	cache_get_value_name_int(0, "gChatMessages", PI[playerid][pGchatMess]);*/
     cache_get_value_name_int(0, "warns", PI[playerid][pWarns]);
 	cache_get_value_name_int(0, "warn_active", PI[playerid][pActiveWarn]);
 	cache_get_value_name_int(0, "warn_time", PI[playerid][punWarnstime]);
@@ -10294,9 +10294,9 @@ function: LoadAccount(playerid)
 	cache_get_value_name_int(0,	"member", PI[playerid][pMember]);
 	cache_get_value_name_int(0,	"vigs", PI[playerid][pVigs]);
 	cache_get_value_name_int(0,	"houronline", PI[playerid][pHourOnline]);
-	cache_get_value_name_int(0,	"allonline", PI[playerid][pAllOnline]);
+	/*cache_get_value_name_int(0,	"allonline", PI[playerid][pAllOnline]);
 	cache_get_value_name_int(0,	"dayonline", PI[playerid][pDayOnline]);
-	cache_get_value_name_int(0,	"afkdayonline", PI[playerid][pAFKDayTime]);
+	cache_get_value_name_int(0,	"afkdayonline", PI[playerid][pAFKDayTime]);*/
 	cache_get_value_name_int(0,	"heals", PI[playerid][pHeal]);
 	cache_get_value_name_int(0,	"mats", PI[playerid][pMats]);
 	cache_get_value_name_int(0,	"licCar", PI[playerid][pLicCar]);
@@ -10304,7 +10304,7 @@ function: LoadAccount(playerid)
 	cache_get_value_name_int(0,	"licPlane", PI[playerid][pLicPlane]);
 	cache_get_value_name_int(0,	"zakonp", PI[playerid][pZakon]);
 	cache_get_value_name_int(0,	"mute", PI[playerid][pMute]);
-	cache_get_value_name_int(0,	"GCmute", PI[playerid][pGCMute]);
+	//cache_get_value_name_int(0,	"GCmute", PI[playerid][pGCMute]);
     cache_get_value_name(0, "email", PI[playerid][pEmail], MAX_EMAIL_LENGHT+1);
 	cache_get_value_name(0, "geton_ip", PI[playerid][pGetonIP], MAX_IP_LENGHT);
 	cache_get_value_name(0, "game_reg_date", PI[playerid][pRegDate], MAX_DATE_LENGHT);
